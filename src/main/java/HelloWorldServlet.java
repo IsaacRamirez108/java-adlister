@@ -1,19 +1,28 @@
 import javax.servlet.annotation.WebServlet;
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet(name = "HelloWorldServlet", urlPatterns = "/Hello-World")
+@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello")
 public class HelloWorldServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int count = Integer.parseInt(request.getParameter("count"));
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        for(int i = 0; i < count; i++){
-            out.println("<h1>Hello, World!</h1>");
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        int count;
+        String name;
+        try {
+            count= Integer.parseInt(req.getParameter("count"));
+        } catch (Exception e) {
+            count = 1;
+        }
+        name = req.getParameter("name");
+        if (name == null) {
+            name = "Isaac";
+        }
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+        for (int i = 0; i < count; i++) {
+            out.println(String.format("<h1>Hello, %s</h1>", name));
         }
     }
-
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 @WebServlet(name = "GoToHelloServlet", urlPatterns = "/go-back")
 public class GoToHelloServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/Hello-World?count=1");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/hello-world");
     }
 }
